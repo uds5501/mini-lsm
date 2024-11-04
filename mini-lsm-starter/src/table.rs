@@ -11,7 +11,7 @@ use std::sync::Arc;
 
 use anyhow::Result;
 pub use builder::SsTableBuilder;
-use bytes::Buf;
+use bytes::{Buf, BufMut};
 pub use iterator::SsTableIterator;
 
 use crate::block::Block;
@@ -39,7 +39,10 @@ impl BlockMeta {
         #[allow(clippy::ptr_arg)] // remove this allow after you finish
         buf: &mut Vec<u8>,
     ) {
-        unimplemented!()
+        block_meta.iter().for_each(|meta| {
+            buf.put_u32(meta.offset as u32);
+            buf.put_slice(meta.first_key.raw_ref())
+        })
     }
 
     /// Decode block meta from a buffer.

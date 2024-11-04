@@ -1,10 +1,8 @@
 #![allow(unused_variables)] // TODO(you): remove this lint after implementing this mod
 #![allow(dead_code)] // TODO(you): remove this lint after implementing this mod
 
-use crate::key::{KeySlice, KeyVec};
-use nom::character::complete::u16;
-
 use super::Block;
+use crate::key::{KeySlice, KeyVec};
 
 /// Builds a block.
 pub struct BlockBuilder {
